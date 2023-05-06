@@ -11,6 +11,8 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//a[normalize-space()='Signup / Login']")
     WebElement loginBtn;
+    @FindBy(xpath = "//a[normalize-space()='Logout']")
+    WebElement logoutBtn;
     @FindBy (xpath = "//li[10]//a[1]")
     WebElement loginWellcomeText;
     @FindBy (xpath = "//li[10]//a[1]/b")
@@ -40,6 +42,11 @@ public class HomePage extends BasePage{
 
     public void clickOnTheDeleteBtn() {
         deleteAccountBtn.click();
+    }
+
+    public void clickOnTheLogoutBtn() {
+        wait.until(ExpectedConditions.visibilityOf(titleText));
+        logoutBtn.click();
     }
 
 }

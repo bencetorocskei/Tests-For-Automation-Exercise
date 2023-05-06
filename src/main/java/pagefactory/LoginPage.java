@@ -10,6 +10,8 @@ public class LoginPage extends BasePage{
     @FindBy (xpath = "//h2[normalize-space()='New User Signup!']")
     WebElement newUserText;
     //@FindBy (xpath = "//section[@id='form']/div[1]/div[1]/div[3]/div[1]/h2")
+    @FindBy (xpath = "//h2[normalize-space()='Login to your account']")
+    WebElement loginUserText;
     @FindBy (xpath = "//input[@data-qa='signup-name']")
     WebElement nameForm;
     @FindBy (xpath = "//input[@data-qa='signup-email']")
@@ -18,16 +20,17 @@ public class LoginPage extends BasePage{
     WebElement signupSubmitBtn;
 
     public String username = "";
-    public String getText() {
+    public String getSignUpText() {
         wait.until(ExpectedConditions.visibilityOf(newUserText));
         return newUserText.getText();
     }
-
-    public void getNameInput() {
-        System.out.println(nameForm.getAttribute("placeholder"));;
+    public String getLoginText() {
+        wait.until(ExpectedConditions.visibilityOf(loginUserText));
+        return loginUserText.getText();
     }
 
-    public void fillTheLoginForm() {
+
+    public void fillTheSignUpForm() {
         String randomValue = UUID.randomUUID().toString();
         nameForm.sendKeys(randomValue);
         username = randomValue;

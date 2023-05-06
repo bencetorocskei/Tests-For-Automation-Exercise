@@ -1,10 +1,5 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pagefactory.*;
-
-import java.sql.SQLOutput;
 
 public class RegisterUser {
 
@@ -36,14 +31,14 @@ public class RegisterUser {
     public void validateLoginPage() {
         homePage.clickOnTheLoginBtn();
         String expected = "New User Signup!";
-        String actual = loginPage.getText();
+        String actual = loginPage.getSignUpText();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void validateAccountInfoPage() {
         homePage.clickOnTheLoginBtn();
-        loginPage.fillTheLoginForm();
+        loginPage.fillTheSignUpForm();
         String expected = "ENTER ACCOUNT INFORMATION";
         String actual = accountInfoPage.getTitleText();
         Assertions.assertEquals(expected, actual);
@@ -52,7 +47,7 @@ public class RegisterUser {
     @Test
     public void validateCreateAccount() {
         homePage.clickOnTheLoginBtn();
-        loginPage.fillTheLoginForm();
+        loginPage.fillTheSignUpForm();
         accountInfoPage.fillTheFormAndClickCreateAccount();
         String expected = "ACCOUNT CREATED!";
         String actual = accountCreatedPage.getTitleText();
@@ -61,7 +56,7 @@ public class RegisterUser {
     @Test
     public void validateRegistration() {
         homePage.clickOnTheLoginBtn();
-        loginPage.fillTheLoginForm();
+        loginPage.fillTheSignUpForm();
         accountInfoPage.fillTheFormAndClickCreateAccount();
         accountCreatedPage.clickOnTheContinueBtn();
         String expected = "Logged in as "+loginPage.username;
@@ -69,9 +64,9 @@ public class RegisterUser {
         Assertions.assertEquals(expected, actual);
     }
     @Test
-    public void validateAccountDelete() {
+    public void happyPath() {
         homePage.clickOnTheLoginBtn();
-        loginPage.fillTheLoginForm();
+        loginPage.fillTheSignUpForm();
         accountInfoPage.fillTheFormAndClickCreateAccount();
         accountCreatedPage.clickOnTheContinueBtn();
         homePage.clickOnTheDeleteBtn();
@@ -79,6 +74,11 @@ public class RegisterUser {
         String expected = "ACCOUNT DELETED!";
         Assertions.assertEquals(expected, actual);
         accountDeletedPage.clickOnTheContinueBtn();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        homePage.shutDown();
     }
 
 }
