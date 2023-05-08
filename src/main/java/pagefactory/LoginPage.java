@@ -26,8 +26,9 @@ public class LoginPage extends BasePage{
     WebElement loginBtn;
 
     @FindBy (xpath = "//p[normalize-space()='Your email or password is incorrect!']")
-    WebElement errorMsg;
-
+    WebElement loginErrorMsg;
+    @FindBy (xpath = "//p[normalize-space()='Email Address already exist!']")
+    WebElement signupErrorMsg;
     public String username = "";
     public String getSignUpText() {
         wait.until(ExpectedConditions.visibilityOf(newUserText));
@@ -46,6 +47,11 @@ public class LoginPage extends BasePage{
         emailForm.sendKeys(randomValue+"@gmail.com");
         signupBtn.click();
     }
+    public void fillTeSignUpFormWithExistingEmail() {
+        nameForm.sendKeys("bence");
+        emailForm.sendKeys("asd@sd");
+        signupBtn.click();
+    }
 
     public void fillTheLoginForm() {
         wait.until(ExpectedConditions.visibilityOf(loginUserText));
@@ -61,8 +67,18 @@ public class LoginPage extends BasePage{
         loginBtn.click();
     }
 
-    public boolean ErrorMsgIsDisplayed() {
-        wait.until(ExpectedConditions.visibilityOf(errorMsg));
-        return errorMsg.isDisplayed();
+    public boolean loginErrorMsgIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(loginErrorMsg));
+        return loginErrorMsg.isDisplayed();
     }
+    public boolean signupErrorMsgIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(signupErrorMsg));
+        return signupErrorMsg.isDisplayed();
+    }
+
+    public String getUrl() {
+        wait.until(ExpectedConditions.visibilityOf(loginUserText));
+        return driver.getCurrentUrl();
+    }
+
 }

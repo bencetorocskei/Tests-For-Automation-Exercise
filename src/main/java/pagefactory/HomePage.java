@@ -19,7 +19,10 @@ public class HomePage extends BasePage{
     WebElement username;
     @FindBy (xpath = "//a[normalize-space()='Delete Account']")
     WebElement deleteAccountBtn;
-
+    @FindBy (xpath = "//a[normalize-space()='Contact us']")
+    WebElement contactBtn;
+    @FindBy (xpath = "//a[@href='/products']")
+    WebElement productsBtn;
     public void openHomePage() {
         String url = "https://automationexercise.com/" ;
         driver.get(url);
@@ -49,4 +52,17 @@ public class HomePage extends BasePage{
         logoutBtn.click();
     }
 
+    public void clickOnTheContactBtn() {
+        wait.until(ExpectedConditions.visibilityOf(titleText));
+        contactBtn.click();
+    }
+
+    public void clickOnTheProducts() {
+        wait.until(ExpectedConditions.visibilityOf(titleText));
+        productsBtn.click();
+
+    }
+    public String getUrl() {
+        return driver.getCurrentUrl();
+    }
 }

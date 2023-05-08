@@ -1,22 +1,19 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pagefactory.*;
 
-public class Login {
+public class LogTests {
 
     private HomePage homePage;
     private LoginPage loginPage;
-    private AccountInfoPage accountInfoPage;
-    private AccountCreatedPage accountCreatedPage;
-    private AccountDeletedPage accountDeletedPage;
 
     @BeforeEach
     public void init() {
         homePage = new HomePage();
         loginPage = new LoginPage();
         homePage.openHomePage();
-
     }
 
     @Test
@@ -44,6 +41,21 @@ public class Login {
     @Test void invalidLogin() {
         homePage.clickOnTheLoginBtn();
         loginPage.fillTheLoginFormInvalid();
-        Assertions.assertTrue(loginPage.ErrorMsgIsDisplayed());
+        Assertions.assertTrue(loginPage.loginErrorMsgIsDisplayed());
     }
+
+    @Test void validateLogout() {
+        homePage.clickOnTheLoginBtn();
+        loginPage.fillTheLoginForm();
+        homePage.clickOnTheLogoutBtn();
+        String expected = "https://automationexercise.com/login";
+        String actual = loginPage.getUrl();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        homePage.shutDown();
+    }
+
 }

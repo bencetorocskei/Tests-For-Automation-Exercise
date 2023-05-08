@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.*;
 import pagefactory.*;
 
-public class RegisterUser {
+public class RegisterUserTests {
 
 
     private HomePage homePage;
@@ -9,6 +9,8 @@ public class RegisterUser {
     private AccountInfoPage accountInfoPage;
     private AccountCreatedPage accountCreatedPage;
     private AccountDeletedPage accountDeletedPage;
+
+
 
     @BeforeEach
     public void init() {
@@ -74,6 +76,13 @@ public class RegisterUser {
         String expected = "ACCOUNT DELETED!";
         Assertions.assertEquals(expected, actual);
         accountDeletedPage.clickOnTheContinueBtn();
+    }
+
+    @Test
+    public void registerWithExistingEmail() {
+        homePage.clickOnTheLoginBtn();
+        loginPage.fillTeSignUpFormWithExistingEmail();
+        Assertions.assertTrue(loginPage.signupErrorMsgIsDisplayed());
     }
 
     @AfterEach
