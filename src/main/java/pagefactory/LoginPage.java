@@ -17,7 +17,16 @@ public class LoginPage extends BasePage{
     @FindBy (xpath = "//input[@data-qa='signup-email']")
     WebElement emailForm;
     @FindBy (xpath = "//button[@data-qa='signup-button']")
-    WebElement signupSubmitBtn;
+    WebElement signupBtn;
+    @FindBy (xpath = "//input[@data-qa='login-email']")
+    WebElement emailAddress;
+    @FindBy (xpath = "//input[@data-qa='login-password']")
+    WebElement passwordInput;
+    @FindBy (xpath = "//button[@data-qa='login-button']")
+    WebElement loginBtn;
+
+    @FindBy (xpath = "//p[normalize-space()='Your email or password is incorrect!']")
+    WebElement errorMsg;
 
     public String username = "";
     public String getSignUpText() {
@@ -35,6 +44,25 @@ public class LoginPage extends BasePage{
         nameForm.sendKeys(randomValue);
         username = randomValue;
         emailForm.sendKeys(randomValue+"@gmail.com");
-        signupSubmitBtn.click();
+        signupBtn.click();
+    }
+
+    public void fillTheLoginForm() {
+        wait.until(ExpectedConditions.visibilityOf(loginUserText));
+        String email = "asd@sd";
+        String password = "b";
+        passwordInput.sendKeys(password);
+        emailAddress.sendKeys(email);
+        loginBtn.click();
+    }
+    public void fillTheLoginFormInvalid() {
+        passwordInput.sendKeys("invalid");
+        emailAddress.sendKeys("invalid@gmail.com");
+        loginBtn.click();
+    }
+
+    public boolean ErrorMsgIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(errorMsg));
+        return errorMsg.isDisplayed();
     }
 }
