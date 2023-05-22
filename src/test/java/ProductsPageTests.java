@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pagefactory.HomePage;
-import pagefactory.LoginPage;
 import pagefactory.ProductsDetailPage;
 import pagefactory.ProductsPage;
 
@@ -34,7 +33,13 @@ public class ProductsPageTests {
         Assertions.assertTrue(productsDetailPage.productDetailsDisplayed());
     }
 
+    @Test
+    public void validateProductSearch() {
+        homePage.clickOnTheProducts();
+        productsPage.setTheSearchForm();
+        Assertions.assertTrue(productsPage.productsAreVisible());
 
+    }
 
 
 }

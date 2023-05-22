@@ -3,6 +3,8 @@ package pagefactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import util.ReadFromConfig;
+
 import java.util.UUID;
 
 public class LoginPage extends BasePage{
@@ -29,6 +31,11 @@ public class LoginPage extends BasePage{
     WebElement loginErrorMsg;
     @FindBy (xpath = "//p[normalize-space()='Email Address already exist!']")
     WebElement signupErrorMsg;
+
+    String email = ReadFromConfig.readFromFile("VALID_EMAIL");
+    String password = ReadFromConfig.readFromFile("VALID_PASSWORD");
+    String userName = ReadFromConfig.readFromFile("VALID_USERNAME");
+
     public String username = "";
     public String getSignUpText() {
         wait.until(ExpectedConditions.visibilityOf(newUserText));
@@ -48,15 +55,13 @@ public class LoginPage extends BasePage{
         signupBtn.click();
     }
     public void fillTeSignUpFormWithExistingEmail() {
-        nameForm.sendKeys("bence");
-        emailForm.sendKeys("asd@sd");
+        nameForm.sendKeys(userName);
+        emailForm.sendKeys(email);
         signupBtn.click();
     }
 
     public void fillTheLoginForm() {
         wait.until(ExpectedConditions.visibilityOf(loginUserText));
-        String email = "asd@sd";
-        String password = "b";
         passwordInput.sendKeys(password);
         emailAddress.sendKeys(email);
         loginBtn.click();

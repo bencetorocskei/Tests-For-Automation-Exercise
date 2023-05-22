@@ -16,7 +16,7 @@ public class ContactPage extends BasePage{
     WebElement subjectInput;
     @FindBy (xpath = "//textarea[@data-qa='message']")
     WebElement messageInput;
-    @FindBy (xpath = "//form[@id='contact-us-form']/div[5]")
+    @FindBy (xpath = "//input[@name='upload_file']")
     WebElement chooseFile;
     @FindBy (xpath = "//input[@data-qa='submit-button']")
     WebElement submitBtn;
@@ -37,9 +37,7 @@ public class ContactPage extends BasePage{
         emailInput.sendKeys("asd@sd");
         subjectInput.sendKeys("test");
         messageInput.sendKeys("dafkasldfkjladsfjlairladknvlacipfpancpralvka");
-        //chooseFile.click();
-        //driver.switchTo().alert();
-        //chooseFile.sendKeys("/home/bence/test.txt");
+        chooseFile.sendKeys("//home//bence//test.txt");
         submitBtn.click();
         driver.switchTo().alert().accept();
     }
