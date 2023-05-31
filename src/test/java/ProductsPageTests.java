@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pagefactory.CartPage;
 import pagefactory.HomePage;
 import pagefactory.ProductsDetailPage;
 import pagefactory.ProductsPage;
@@ -10,12 +11,14 @@ public class ProductsPageTests {
     private HomePage homePage;
     private ProductsPage productsPage;
     private ProductsDetailPage productsDetailPage;
+    private CartPage cartPage;
 
     @BeforeEach
     public void init() {
         homePage = new HomePage();
         productsPage = new ProductsPage();
         productsDetailPage = new ProductsDetailPage();
+        cartPage = new CartPage();
         homePage.openHomePage();
     }
 
@@ -39,6 +42,17 @@ public class ProductsPageTests {
         productsPage.setTheSearchForm();
         Assertions.assertTrue(productsPage.productsAreVisible());
 
+    }
+
+    @Test
+    public void validateAddCart() {
+        homePage.clickOnTheProducts();
+        productsPage.hoverOverTheGivenProductAndClickAddToCart(1);
+        productsPage.switchToModalAndAccept();
+        productsPage.hoverOverTheGivenProductAndClickAddToCart(2);
+        productsPage.switchToModalAndAccept();
+        productsPage.clickOnTheCartBtn();
+        cartPage.getProductInfo();
     }
 
 

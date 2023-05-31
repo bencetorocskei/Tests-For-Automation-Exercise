@@ -24,16 +24,23 @@ public class HomePage extends BasePage{
     WebElement contactBtn;
     @FindBy (xpath = "//a[@href='/products']")
     WebElement productsBtn;
+    @FindBy (xpath = "//footer[@id='footer']")
+    WebElement footer;
     @FindBy (xpath = "//input[@id='susbscribe_email']")
     WebElement subscribeField;
     @FindBy (xpath = "//button[@id='subscribe']")
     WebElement subscribeSubmitBtn;
     @FindBy (xpath = "//div[@id='success-subscribe']")
     WebElement subscribeSuccessMsg;
+    @FindBy (xpath = "//h2[normalize-space()='Subscription']")
+    WebElement footerTitle;
+    @FindBy (xpath = "//a[normalize-space()='Cart']")
+    WebElement cartBtn;
     public void openHomePage() {
         String url = "https://automationexercise.com/" ;
         driver.get(url);
     }
+
     public String getTitleText() {
         wait.until(ExpectedConditions.visibilityOf(titleText));
         return titleText.getAttribute("alt");
@@ -67,10 +74,19 @@ public class HomePage extends BasePage{
     public void clickOnTheProducts() {
         wait.until(ExpectedConditions.visibilityOf(titleText));
         productsBtn.click();
-
+    }
+    public void clickOnTheCart() {
+        wait.until(ExpectedConditions.visibilityOf(titleText));
+        cartBtn.click();
     }
     public String getUrl() {
         return driver.getCurrentUrl();
+    }
+    public void scrollDownToFooter() {
+        action.scrollToElement(footer).perform();
+    }
+    public String getFooterTitle() {
+        return footerTitle.getText();
     }
     public void setSubscribeField() {
         wait.until(ExpectedConditions.visibilityOf(titleText));
@@ -82,4 +98,5 @@ public class HomePage extends BasePage{
         System.out.println(subscribeSuccessMsg.getText());
         return subscribeSuccessMsg.isDisplayed();
     }
+
 }
